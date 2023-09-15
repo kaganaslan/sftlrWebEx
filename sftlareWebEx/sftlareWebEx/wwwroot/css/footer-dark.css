@@ -1,0 +1,21 @@
+﻿
+
+.footer {
+    background-color: rgb(19, 19, 20);
+    color: white;
+    padding: 10px 0;
+}
+
+.footer-links a {
+    color: white;
+    margin-right: 15px;
+}
+
+    .footer-links a:hover {
+        text-decoration: underline;
+    }
+
+.footer .container {
+    padding-left: 0; /* removes left padding */
+    padding-right: 0; /* removes right padding */
+}

@@ -1,0 +1,121 @@
+﻿﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - sftlareWebEx</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+    <link href="~/css/footer-dark.css" rel="stylesheet" />
+    <link href="~/css/navbar.css" rel="stylesheet" />
+    <link href="~/css/movies-index.css" rel="stylesheet" />
+
+    <style>
+        body {
+            background-color: rgb(176,196,222) !important;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Comfortaa', cursive;
+        }
+    </style>
+</head>
+
+
+<body>
+   
+    <header>
+        @if (ViewData["Title"] == "Log in to your account" || ViewData["Title"] == "Sign up for a new account" || ViewData["Title"] == "Movie details")
+        {
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid justify-content-center">
+                    <a class="navbar-brand" asp-controller="Movies" asp-action="Index">
+                        <img src="https://media.softlare.de/website/Softlare-Logo_06ee8c1c75024e5191a4d9eab511de94_6b03ddc2da794b27b1f7d5336c476344.svg" alt="Softlare Logo" style="height: 40px;">
+                    </a>
+                </div>
+            </nav>
+
+        }
+        else
+        {
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container-fluid">
+                    <a class="navbar-brand" asp-controller="Movies" asp-action="Index">
+                        <img src="https://media.softlare.de/website/Softlare-Logo_06ee8c1c75024e5191a4d9eab511de94_6b03ddc2da794b27b1f7d5336c476344.svg" alt="Softlare Logo" style="height: 40px; margin-right: 10px;">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="Index"><i class="bi bi-film"></i> Movies</a>
+                            </li>
+
+                            @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="bi bi-gear"></i> Management
+                                    </a>
+
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"><i class="bi bi-camera-reels"></i> Cinemas</a>
+                                        <a class="dropdown-item" asp-controller="Producers" asp-action="Index"><i class="bi bi-headset"></i> Producers</a>
+                                        <a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-square"></i> Actors</a>
+                                        <a class="dropdown-item" asp-controller="Movies" asp-action="Create"><i class="bi bi-camera-reels"></i> Add New Movie</a>
+                                    </div>
+                                </li>
+                            }
+
+                        </ul>
+
+                        <form class="form-inline my-2 my-lg-0" asp-controller="Movies" asp-action="Filter" style="padding-right: 25px;">
+                            <input name="searchString" type="text" class="form-control navbar-custom-text" placeholder="Search for a movie..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn navbar-custom-text" type="submit"><i class="bi bi-search"></i></button>
+                        </form>
+
+
+                        <ul class="navbar-nav">
+                            @await Component.InvokeAsync("ShoppingCartSummary")
+                        </ul>
+
+                        <partial name="_Identity.cshtml" />
+                    </div>
+                </div>
+            </nav>
+        }
+        
+    </header>
+    <div class="container-fluid">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container text-center"> 
+        <d
+           iv class="footer-links">
+            <a href="#">Services</a>
+                <a href="#">Company Name</a>
+                <a href="#">Support</a>
+                <a>&copy; 2023 - stflareWebEx</a>
+        </div>
+    </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

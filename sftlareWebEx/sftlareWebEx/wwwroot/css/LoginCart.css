@@ -1,0 +1,22 @@
+﻿.custom-card {
+    border-radius: 25px;
+    font-family: 'Comfortaa', cursive;
+    background-color: rgba(255, 255, 255);
+    overflow: hidden;
+}
+
+.card-header {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    background-color: rgb(0, 36, 126);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+body {
+    background: url('https://www.pixelstalk.net/wp-content/uploads/2016/03/Backgorund-wallpaper-dark.png') no-repeat center center fixed;
+    background-size: cover;
+    font-family: 'Comfortaa', cursive;
+}
