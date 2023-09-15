@@ -62,7 +62,9 @@
                                 @foreach (var actor in Model.Actor_Movies)
                                 {
                                         <div class="column text-center">
-                                            <img class="border-info rounded-circle" src="@actor.Actor.ProfilePictureURL" style="max-width: 150px" />
+                                        <div class="actor-image-container">
+                                        <img class="border-info rounded-circle" src="@actor.Actor.ProfilePictureURL" style="max-width: 150px" />
+                                        </div> 
                                             <br />
                                             <a asp-controller="Actors" asp-action="Details" asp-route-id="@actor.ActorId">@actor.Actor.FullName</a>
                                         </div>

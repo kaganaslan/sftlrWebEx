@@ -66,34 +66,34 @@ namespace sftlareWebEx.Data
                     {
                         new Actor()
                         {
-                            FullName = "Actor 1",
-                            Bio = "This is the Bio of the first actor",
-                            ProfilePictureURL = "http://dotnethow.net/images/actors/actor-1.jpeg"
+                            FullName = "Kagan Aslan",
+                            Bio = "This is the Bio of the Kagan Aslan",
+                            ProfilePictureURL = "https://media.licdn.com/dms/image/C5603AQG3sCUsx3hQpQ/profile-displayphoto-shrink_800_800/0/1632734140809?e=2147483647&v=beta&t=ah1d2pxHdtsBDlIeICv-B02ABmAgogMPteBTIhZ2YPg"
 
                         },
                         new Actor()
                         {
-                            FullName = "Actor 2",
-                            Bio = "This is the Bio of the second actor",
-                            ProfilePictureURL = "http://dotnethow.net/images/actors/actor-2.jpeg"
+                            FullName = "Ural Ikinci",
+                            Bio = "This is the Bio of the Ural Ikinci",
+                            ProfilePictureURL = "https://media.licdn.com/dms/image/C4D03AQGuCMt0z4_1yg/profile-displayphoto-shrink_800_800/0/1639853850792?e=2147483647&v=beta&t=zowAoa8az2hhvbpVfAs39zO89mye04sNyB7ihSpQl_4"
                         },
                         new Actor()
                         {
-                            FullName = "Actor 3",
-                            Bio = "This is the Bio of the second actor",
-                            ProfilePictureURL = "http://dotnethow.net/images/actors/actor-3.jpeg"
+                            FullName = "Cillian Murphy",
+                            Bio = "This is the Bio of the Cillian Murphy",
+                            ProfilePictureURL = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/75/Cillian_Murphy-2014.jpg/640px-Cillian_Murphy-2014.jpg?Cillian_Murphy1174923413"
                         },
                         new Actor()
                         {
-                            FullName = "Actor 4",
-                            Bio = "This is the Bio of the second actor",
-                            ProfilePictureURL = "http://dotnethow.net/images/actors/actor-4.jpeg"
+                            FullName = "Matthew Mcconaughey",
+                            Bio = "This is the Bio of the Matthew Mcconaughey",
+                            ProfilePictureURL = "https://img.a.transfermarkt.technology/portrait/big/94540-1636851420.jpg?lm=1"
                         },
                         new Actor()
                         {
-                            FullName = "Actor 5",
-                            Bio = "This is the Bio of the second actor",
-                            ProfilePictureURL = "http://dotnethow.net/images/actors/actor-5.jpeg"
+                            FullName = "Isla Fisher",
+                            Bio = "This is the Bio of the Isla Fisher",
+                            ProfilePictureURL = "https://upload.wikimedia.org/wikipedia/commons/a/ab/Isla_Fisher_2013.jpg"
                         }
                     });
                     context.SaveChanges();
@@ -144,10 +144,10 @@ namespace sftlareWebEx.Data
                     {
                         new Movie()
                         {
-                            Name = "Life",
-                            Description = "This is the Life movie description",
+                            Name = "Sihirbazlar Çetesi",
+                            Description = "This is the Sihirbazlar Çetesi movie description",
                             Price = 39.50,
-                            ImageURL = "http://dotnethow.net/images/movies/movie-3.jpeg",
+                            ImageURL = "https://tr.web.img2.acsta.net/pictures/210/029/21002984_20130503101249414.jpg",
                             StartDate = DateTime.Now.AddDays(-10),
                             EndDate = DateTime.Now.AddDays(10),
                             CinemaId = 3,
@@ -168,10 +168,10 @@ namespace sftlareWebEx.Data
                         },
                         new Movie()
                         {
-                            Name = "Ghost",
-                            Description = "This is the Ghost movie description",
-                            Price = 39.50,
-                            ImageURL = "http://dotnethow.net/images/movies/movie-4.jpeg",
+                            Name = "Oppenheimer",
+                            Description = "This is the Oppenheimer movie description This is the Oppenheimer movie description This is the Oppenheimer movie description This is the Oppenheimer movie description This is the Oppenheimer movie description ",
+                            Price = 61,
+                            ImageURL = "https://m.media-amazon.com/images/I/71lqDylcvGL.jpg",
                             StartDate = DateTime.Now,
                             EndDate = DateTime.Now.AddDays(7),
                             CinemaId = 4,
@@ -180,10 +180,10 @@ namespace sftlareWebEx.Data
                         },
                         new Movie()
                         {
-                            Name = "Race",
-                            Description = "This is the Race movie description",
+                            Name = "Toy Story",
+                            Description = "This is the Toy Story movie description This is the Toy Story movie description",
                             Price = 39.50,
-                            ImageURL = "http://dotnethow.net/images/movies/movie-6.jpeg",
+                            ImageURL = "https://m.media-amazon.com/images/I/71aBLaC4TzL.jpg",
                             StartDate = DateTime.Now.AddDays(-10),
                             EndDate = DateTime.Now.AddDays(-5),
                             CinemaId = 1,
@@ -192,10 +192,10 @@ namespace sftlareWebEx.Data
                         },
                         new Movie()
                         {
-                            Name = "Scoob",
-                            Description = "This is the Scoob movie description",
+                            Name = "Interstellar",
+                            Description = "This is the Interstellar movie description",
                             Price = 39.50,
-                            ImageURL = "http://dotnethow.net/images/movies/movie-7.jpeg",
+                            ImageURL = "https://m.media-amazon.com/images/I/71LNVGVpWYL._AC_UF894,1000_QL80_.jpg",
                             StartDate = DateTime.Now.AddDays(-10),
                             EndDate = DateTime.Now.AddDays(-2),
                             CinemaId = 1,
@@ -204,10 +204,10 @@ namespace sftlareWebEx.Data
                         },
                         new Movie()
                         {
-                            Name = "Cold Soles",
-                            Description = "This is the Cold Soles movie description",
-                            Price = 39.50,
-                            ImageURL = "http://dotnethow.net/images/movies/movie-8.jpeg",
+                            Name = "The Conjuring",
+                            Description = "This is the The Conjuring movie description",
+                            Price = 61.61,
+                            ImageURL = "https://img5.allocine.fr/acmedia/medias/nmedia/18/97/25/01/20518390.jpg",
                             StartDate = DateTime.Now.AddDays(3),
                             EndDate = DateTime.Now.AddDays(20),
                             CinemaId = 1,
