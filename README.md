@@ -1,9 +1,9 @@
 # sftlrWebEx
 
 //admin user
-admin@sftlareWebEx.com
-Coding@1234?
+user:admin@sftlareWebEx.com
+pw:Coding@1234?
 
 //paypal entegre hesabı giriş(ödeme anında girilir)
-sb-ytarg7968797@personal.example.com
-12345678
+user:sb-ytarg7968797@personal.example.com
+pw:12345678
