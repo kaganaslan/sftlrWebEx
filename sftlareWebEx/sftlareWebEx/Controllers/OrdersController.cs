@@ -45,15 +45,16 @@ namespace sftlareWebEx.Controllers
         }
 
 
-        public async Task<IActionResult> AddItemToShoppingCart(int id)
+        public async Task<IActionResult> AddItemToShoppingCart(int id, string selectedSeats)
         {
-            var item =await _moviesService.GetMovieByIdAsync(id);
+            var item = await _moviesService.GetMovieByIdAsync(id);
             if (item != null)
             {
-                _shoppingCart.RemoveItemToCart(item);
+                _shoppingCart.AddItemToCart(item, selectedSeats); 
             }
             return RedirectToAction(nameof(ShoppingCart));
         }
+
 
         public async Task<IActionResult> RemoveItemFromShoppingCart(int id)
         {

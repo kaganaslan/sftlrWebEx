@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IAQ/vtR9RoJ4UfrDuAKOJ+3kTfNarmakewrtgNdQabVGyxhpeSNa4ggWUZBq++CYWzc84501jORokPlnxUQAwA==",
+  "dgSpecHash": "P/egVXnG3D8wRAY7yhEkeUHfUOScp4njXfHwT0jCr6XjVrb1v22DIUb10F+gaKyJbk1YrS5zrN2npDUrYBoW0g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\chapk\\OneDrive\\Masaüstü\\.net dersleri\\sftlareWebEx\\sftlareWebEx\\sftlareWebEx.csproj",
+  "projectFilePath": "C:\\Users\\chapk\\OneDrive\\Masaüstü\\seeeat\\sftlrWebEx-main\\sftlareWebEx\\sftlareWebEx\\sftlareWebEx.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\chapk\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\chapk\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.17\\microsoft.aspnetcore.cryptography.internal.5.0.17.nupkg.sha512",

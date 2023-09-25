@@ -12,5 +12,7 @@ namespace sftlareWebEx.Models
 
 
         public string ShoppingCartId { get; set; }
+
+        public string SelectedSeats { get; set; }
     }
 }

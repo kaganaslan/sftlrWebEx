@@ -18,5 +18,7 @@ namespace sftlareWebEx.Models
         public int OrderId { get; set; }
         [ForeignKey("OrderId")]
         public Order Order { get; set; }
+
+        public string SelectedSeats { get; set; }
     }
 }

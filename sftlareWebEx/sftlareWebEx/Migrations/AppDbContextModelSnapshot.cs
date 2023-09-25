@@ -363,6 +363,9 @@ namespace sftlareWebEx.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
+                    b.Property<string>("SelectedSeats")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("MovieId");
@@ -409,6 +412,9 @@ namespace sftlareWebEx.Migrations
 
                     b.Property<int?>("MovieId")
                         .HasColumnType("int");
+
+                    b.Property<string>("SelectedSeats")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShoppingCartId")
                         .HasColumnType("nvarchar(max)");

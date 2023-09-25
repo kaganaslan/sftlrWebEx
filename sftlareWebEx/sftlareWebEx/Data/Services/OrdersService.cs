@@ -43,7 +43,8 @@ namespace sftlareWebEx.Data.Services
                     Amount = item.Amount,
                     MovieId = item.Movie.Id,
                     OrderId = order.Id,
-                    Price = item.Movie.Price
+                    Price = item.Movie.Price,
+                    SelectedSeats=item.SelectedSeats
                 };
                 await _context.OrderItems.AddAsync(orderItem);
             }

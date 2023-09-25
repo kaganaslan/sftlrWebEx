@@ -32,17 +32,19 @@ namespace sftlareWebEx.Data.Cart
             return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
 
-        public void RemoveItemToCart(Movie movie)
+        public void AddItemToCart(Movie movie, string selectedSeats)
         {
-            var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(n => n.Movie.Id == movie.Id && n.ShoppingCartId == ShoppingCartId);
+            var shoppingCartItem = _context.ShoppingCartItems.FirstOrDefault(
+                s => s.Movie.Id == movie.Id && s.ShoppingCartId == ShoppingCartId);
 
             if (shoppingCartItem == null)
             {
-                shoppingCartItem = new ShoppingCartItem()
+                shoppingCartItem = new ShoppingCartItem
                 {
                     ShoppingCartId = ShoppingCartId,
                     Movie = movie,
-                    Amount = 1
+                    Amount = 1,
+                    SelectedSeats = selectedSeats
                 };
 
                 _context.ShoppingCartItems.Add(shoppingCartItem);
@@ -53,6 +55,8 @@ namespace sftlareWebEx.Data.Cart
             }
             _context.SaveChanges();
         }
+
+
 
         public void RemoveItemFromCart(Movie movie)
         {

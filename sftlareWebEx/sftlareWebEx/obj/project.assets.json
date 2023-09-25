@@ -6223,11 +6223,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\chapk\\OneDrive\\Masaüstü\\.net dersleri\\sftlareWebEx\\sftlareWebEx\\sftlareWebEx.csproj",
+      "projectUniqueName": "C:\\Users\\chapk\\OneDrive\\Masaüstü\\seeeat\\sftlrWebEx-main\\sftlareWebEx\\sftlareWebEx\\sftlareWebEx.csproj",
       "projectName": "sftlareWebEx",
-      "projectPath": "C:\\Users\\chapk\\OneDrive\\Masaüstü\\.net dersleri\\sftlareWebEx\\sftlareWebEx\\sftlareWebEx.csproj",
+      "projectPath": "C:\\Users\\chapk\\OneDrive\\Masaüstü\\seeeat\\sftlrWebEx-main\\sftlareWebEx\\sftlareWebEx\\sftlareWebEx.csproj",
       "packagesPath": "C:\\Users\\chapk\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\chapk\\OneDrive\\Masaüstü\\.net dersleri\\sftlareWebEx\\sftlareWebEx\\obj\\",
+      "outputPath": "C:\\Users\\chapk\\OneDrive\\Masaüstü\\seeeat\\sftlrWebEx-main\\sftlareWebEx\\sftlareWebEx\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

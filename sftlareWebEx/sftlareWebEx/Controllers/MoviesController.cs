@@ -35,7 +35,6 @@ namespace sftlareWebEx.Controllers
 
             if (!string.IsNullOrEmpty(searchString))
             {
-                //var filteredResult=allMovies.Where(n=>n.Name.ToLower().Contains(searchString.ToLower())||n.Description.ToLower().Contains(searchString.ToLower())).ToList();
 
                 var filteredResultNew = allMovies.Where(n => string.Equals(n.Name,searchString,StringComparison.CurrentCultureIgnoreCase) || string.Equals(n.Description, searchString, StringComparison.CurrentCultureIgnoreCase)).ToList();
                 return View("Index", filteredResultNew);
@@ -46,11 +45,26 @@ namespace sftlareWebEx.Controllers
 
         //GET:Movies/Details/1
         [AllowAnonymous]
-        public async Task<IActionResult>Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var MovieDetail = await _service.GetMovieByIdAsync(id);
-            return View(MovieDetail);
+            var movie = await _service.GetMovieByIdAsync(id);
+            var reservedSeats = await _service.GetReservedSeatsForMovieAsync(id);
+            if (reservedSeats == null || !reservedSeats.Any())
+            {
+                Console.WriteLine("rezerve yok");
+            }
+            else
+            {
+                foreach (var seat in reservedSeats)
+                {
+                    Console.WriteLine("Reserved Seat: " + seat);
+                }
+            }
+            ViewBag.ReservedSeats = reservedSeats; 
+
+            return View(movie);
         }
+
 
         //GET:Movies/Create
 

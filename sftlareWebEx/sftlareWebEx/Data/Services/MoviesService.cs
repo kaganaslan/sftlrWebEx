@@ -2,6 +2,7 @@
 using sftlareWebEx.Data.Base;
 using sftlareWebEx.Data.ViewModels;
 using sftlareWebEx.Models;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,6 +14,14 @@ namespace sftlareWebEx.Data.Services
         public MoviesService(AppDbContext context):base(context)
         {
             _context = context;
+        }
+
+        public async Task<List<string>> GetReservedSeatsForMovieAsync(int movieId)
+        {
+            return await _context.OrderItems
+                           .Where(oi => oi.MovieId == movieId)
+                           .Select(oi => oi.SelectedSeats)
+                           .ToListAsync();
         }
 
         public async Task AddNewMovieAsync(NewMovieVM data)

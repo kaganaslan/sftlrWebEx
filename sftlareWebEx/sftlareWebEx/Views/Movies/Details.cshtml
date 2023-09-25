@@ -2,9 +2,15 @@
 
 @{
     ViewData["Title"] = "Movie details";
+    var reservedSeats = ViewBag.ReservedSeats as List<string>;
+
 }
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 <link href="~/css/movie-details.css" rel="stylesheet" />
+<div id="page-loader">
+    <div class="spinner"></div>
+</div>
 
 <div class="row d-flex align-items-center justify-content-center">
     <div class="row d-flex align-items-center justify-content-center" style="margin-top: 50px;">
@@ -19,10 +25,10 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <img src="@Model.ImageURL" width="100%" alt="@Model.Name">
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <div class="card-body">
                         <p class="card-text">@Model.Description</p>
                         <p class="card-text">
@@ -44,34 +50,64 @@
                             <b>Status: </b>
                             @if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate)
                             {
-                                    <span class="badge bg-success text-white">AVAILABLE</span>
+                                <span class="badge bg-success text-white">AVAILABLE</span>
                             }
                             else if (DateTime.Now > Model.EndDate)
                             {
-                                    <span class="badge bg-danger text-white">EXPIRED</span>
+                                <span class="badge bg-danger text-white">EXPIRED</span>
                             }
                             else
                             {
-                                    <span class="badge bg-primary text-white">UPCOMING</span>
+                                <span class="badge bg-primary text-white">UPCOMING</span>
                             }
                         </p>
-                        <p class="card-text">
-                            <b>Actors: </b>
-                            <hr />
-                            <div class="row">
-                                @foreach (var actor in Model.Actor_Movies)
+                       
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; align-items: center; width: 100%;">
+                    <p class="card-text" style="width: 100%; text-align: center;">
+                        <b>Actors: </b>
+                        <hr />
+                    </p>
+                    <div class="actor-row">
+                        @foreach (var actor in Model.Actor_Movies)
+                        {
+                            <div class="column text-center">
+                                <div class="actor-image-container">
+                                    <img class="border-info rounded-circle" src="@actor.Actor.ProfilePictureURL" style="max-width: 150px" />
+                                </div>
+                                <br />
+                                <a asp-controller="Actors" asp-action="Details" asp-route-id="@actor.ActorId">@actor.Actor.FullName</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="cinema-container">
+                    <div class="screen">SAHNE</div>
+                    <div class="seating-chart">
+                        @{
+                            string[] rowNames = { "A", "B", "C", "D", "E" };
+                        }
+                        @for (int row = 0; row < 5; row++)
+                        {
+                            <div class="seat-row">
+                                <div class="row-name">@rowNames[row]</div>
+
+                                @for (int seat = 1; seat <= 8; seat++)
                                 {
-                                        <div class="column text-center">
-                                        <div class="actor-image-container">
-                                        <img class="border-info rounded-circle" src="@actor.Actor.ProfilePictureURL" style="max-width: 150px" />
-                                        </div> 
-                                            <br />
-                                            <a asp-controller="Actors" asp-action="Details" asp-route-id="@actor.ActorId">@actor.Actor.FullName</a>
-                                        </div>
+                                    var seatId = rowNames[row] + seat;
+                                    var seatClass = reservedSeats.Contains(seatId) ? "booked" : "available";
+                                    <div class="seat @seatClass" data-seat-id="@seatId">
+                                        <i class="fas fa-chair seat-icon"></i>
+                                        <span class="seat-number">@seat</span>
+                                    </div>
                                 }
                             </div>
-                        </p>
-
+                        }
+                    </div>
+                    <div class="selected-seats-container">
+                        <h6>Selected Seats:</h6>
+                        <span id="selected-seats">None</span>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -80,9 +116,9 @@
                             <a class="btn btn-outline-primary float-right" asp-action="Index">
                                 Back to List
                             </a>
-                            <a class="btn btn-success text-white  @((DateTime.Now > Model.EndDate) ? "disabled" : "")"
-                               asp-controller="Orders"
-                               asp-action="AddItemToShoppingCart" asp-route-id="@Model.Id"><i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.Price.ToString("c"))</a>
+                            <a class="btn btn-success text-white  @((DateTime.Now > Model.EndDate) ? "disabled" : "")" id="addToCartButton" disabled>
+                                <i class="bi bi-cart-plus"></i> Add to Cart (Price @Model.Price.ToString("c"))
+                            </a>
                         </p>
                     </div>
                 </div>
@@ -90,3 +126,269 @@
         </div>
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+
+    $(document).ready(function () {
+        var backgroundImage = new Image();
+        backgroundImage.src = $("body").css("background-image").replace(/url\(["']?/, "").replace(/["']?\)/, "");
+
+        backgroundImage.onload = function () {
+            $("#page-loader").fadeOut("slow");
+        };
+
+        setTimeout(function () {
+            $("#page-loader").fadeOut("slow");
+        }, 10000);
+    });
+
+
+
+
+
+$(document).ready(function() {
+    var reservedSeatsRaw = @Json.Serialize(reservedSeats);
+    var reservedSeatsDebug = [].concat(...reservedSeatsRaw.map(seat => seat.split(','))).map(s => s.trim());
+
+    console.log("Reserved Seats (Processed):", reservedSeatsDebug);
+
+    $(".seat").each(function() {
+        var seatIdDebug = $(this).attr("data-seat-id");
+        console.log("Checking seat:", seatIdDebug);
+        if (reservedSeatsDebug.includes(seatIdDebug)) {
+            console.log(seatIdDebug + " should be booked!");
+            $(this).addClass('booked');
+            $(this).append('<span class="booked-label">booked</span>');
+            } else {
+            console.log(seatIdDebug + " is not in the reserved list.");
+        }
+    });
+});
+
+
+
+
+$(document).ready(function () {
+    $('#addToCartButton').click(function (event) {
+        var selectedSeats = getSelectedSeats();
+        if (!selectedSeats) {
+            event.preventDefault();
+            alert("Lütfen bir koltuk seçiniz.");
+                location.reload();
+            } else {
+            window.location.href = '/Orders/AddItemToShoppingCart?id=@Model.Id&selectedSeats=' + selectedSeats;
+        }
+    });
+});
+
+
+
+    $(document).ready(function () {
+        $(".seat").click(function () {
+            if (!$(this).hasClass("booked")) {
+                if ($(this).hasClass("selected")) {
+                    $(this).removeClass("selected");
+                } else {
+                    $(this).addClass("selected");
+                }
+                updateSelectedSeatsDisplay();
+            }
+        });
+    });
+
+
+    function getSelectedSeats() {
+        var selectedSeatIds = [];
+        $(".seat.selected").each(function () {
+            selectedSeatIds.push($(this).attr("data-seat-id"));
+        });
+        return selectedSeatIds.join(", ");
+    }
+
+    function updateSelectedSeatsDisplay() {
+        var selectedSeatsList = getSelectedSeats();
+        $("#selected-seats").text(selectedSeatsList);
+        console.log("Selected Seats: ", selectedSeatsList);
+    }
+
+
+</script>
+
+
+                
+
+<style>
+    .actor-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+
+
+#page-loader {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.9); 
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+
+/* Spinner */
+.spinner {
+    border: 8px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top: 8px solid #000; 
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+    .selected-seats-container {
+        width: 80%;
+        margin: 20px auto 10px auto;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    #selected-seats {
+        font-weight: bold;
+    }
+
+    .cinema-container {
+        width: 80%;
+        margin: auto;
+        position: relative;
+    }
+
+    .screen {
+        width: 100%;
+        height: 50px;
+        background-color: #ddd;
+        text-align: center;
+        margin-bottom: 20px;
+        line-height: 50px;
+        font-size: 24px;
+        font-weight: bold;
+        letter-spacing: 2px;
+    }
+
+    .seating-chart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .seat-row {
+        display: flex;
+        justify-content: center;
+        margin: 5px 0;
+    }
+
+    .seat {
+        width: 45px; 
+        height: 45px; 
+        margin: 5px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        border: none;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 7px; /* koltuk köşelerini yuvarlamak için */
+    }
+
+    .seat-icon {
+        font-size: 18px;
+    }
+
+    .seat-number {
+        position: absolute;
+        top: 3px; 
+        right: 3px; 
+        font-size: 9px; 
+        background-color: rgba(255, 255, 255, 0.6);
+        padding: 1px 3px;
+        border-radius: 2px;
+    }
+
+
+    .seat-number {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 10px;
+        background-color: rgba(255, 255, 255, 0.6);
+        padding: 1px 3px;
+        border-radius: 2px;
+    }
+
+    .row-name {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        margin-right: 10px;
+    }
+
+    /* Seat states styles */
+    .seat.available {
+        background-color: green;
+        .seat-icon
+
+    {
+        color: transparent; /* Yeşil ikonun gözükmemesi için */
+    }
+
+    }
+
+    .seat.selected {
+        background-color: greenyellow;
+        .seat-icon
+
+    {
+        color: forestgreen;
+    }
+
+    }
+
+    .seat.booked {
+        background-color: red;
+        cursor: not-allowed;
+        .seat-icon
+
+    {
+        color: red;
+    }
+
+    }
+
+    .booked-label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 10px;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px black;
+    }
+</style>
